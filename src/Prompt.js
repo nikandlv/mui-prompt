@@ -13,6 +13,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
+import { DialogContent, DialogActions } from '@material-ui/core';
 
 const Prompt = {};
 // eslint-disable-next-line no-console
@@ -35,31 +36,24 @@ class View extends React.Component {
                         function handleClose() {
                             Prompt[key].open = false;
                             Update()
+                            window.setTimeout(() => {
+                                delete Prompt[key];
+                            },200)
                         }
                         return (
-                            <Dialog key={key} onClose={handleClose} aria-labelledby="simple-dialog-title" open={prompt.open}>
-                            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-                            <List>
-                              {emails.map(email => (
-                                <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-                                  <ListItemAvatar>
-                                    <Avatar className={classes.avatar}>
-                                      <PersonIcon />
-                                    </Avatar>
-                                  </ListItemAvatar>
-                                  <ListItemText primary={email} />
-                                </ListItem>
-                              ))}
-                      
-                              <ListItem button onClick={() => handleListItemClick('addAccount')}>
-                                <ListItemAvatar>
-                                  <Avatar>
-                                    <AddIcon />
-                                  </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="add account" />
-                              </ListItem>
-                            </List>
+                            <Dialog fullWidth maxWidth="xs" key={key} onClose={handleClose} aria-labelledby="simple-dialog-title" open={prompt.open}>
+                            <DialogTitle id="simple-dialog-title">{prompt.title}</DialogTitle>
+                            <DialogContent>
+                                {prompt.body}
+                            </DialogContent>
+                            <DialogActions>
+                            <Button variant="text" color="primary">
+                                    Cancel
+                                </Button>
+                                <Button variant="contained" color="secondary">
+                                    Continue
+                                </Button>
+                            </DialogActions>
                           </Dialog>
                         )
                     })
@@ -69,11 +63,11 @@ class View extends React.Component {
 	}
 }
 
-function ask(id,callback,title = "Are you sure?", body = "This action cannot be undone.") {
+function ask(id,data) {
     Prompt[id] = {
-        callback,
-        title,
-        body,
+        callback : data.callback,
+        title : data.title || 'Are you sure?',
+        body : data.body || 'This action can not be undone!',
         open: true
     }
     Update()

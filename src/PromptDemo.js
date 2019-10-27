@@ -6,7 +6,11 @@ export default class PromptDemo extends React.Component {
     render() {
 
         function simplePrompt() {
-            
+            Prompt.ask('test',{
+                callback:(status) => {
+                    console.log(status)
+                }
+            })
         }
 
         return (
