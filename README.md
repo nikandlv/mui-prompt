@@ -4,7 +4,7 @@
 
 with mui-prompt you can easily ask user for confirmation before executing an important action
 
-![Prompt](./icon.png =75x)
+<img src="icon.png" alt="drawing" width="75"/>
 
 
 ## Demo
