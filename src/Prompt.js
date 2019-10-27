@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +9,12 @@ const Prompt = {};
 // eslint-disable-next-line no-console
 let Update = () => console.log("Prompt is not ready yet");
 
+const styles = {
+    dialog: {
+        width: 240,
+        paddingBottom: 24
+    }
+}
 
 class View extends React.Component {
 	componentDidMount() {
@@ -18,6 +24,7 @@ class View extends React.Component {
 	}
 
 	render() {
+        const classes = this.props.classes
 		return (
 			<React.Fragment>
 				{
@@ -31,9 +38,9 @@ class View extends React.Component {
                             },200)
                         }
                         return (
-                            <Dialog fullWidth maxWidth="xs" key={key} onClose={handleClose} aria-labelledby="simple-dialog-title" open={prompt.open}>
+                            <Dialog maxWidth="xs" key={key} onClose={handleClose} aria-labelledby="simple-dialog-title" open={prompt.open}>
                             <DialogTitle id="simple-dialog-title">{prompt.title}</DialogTitle>
-                            <DialogContent>
+                            <DialogContent className={classes.dialog}>
                                 {prompt.body}
                             </DialogContent>
                             <DialogActions>
@@ -66,5 +73,5 @@ function ask(id,data) {
 
 export default {
     ask,
-    View
+    View : withStyles(styles)(View)
 }
