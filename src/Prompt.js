@@ -21,6 +21,8 @@ function ask(id,data) {
         callback : data.callback,
         title : data.title || 'Are you sure?',
         body : data.body || 'This action can not be undone!',
+        cancel : data.cancel || 'Cancel',
+        continue : data.continue || 'Continue',
         open: true
     }
     Update()
@@ -68,11 +70,11 @@ class View extends React.Component {
                             </DialogContent>
                             <DialogActions>
                                 <Button variant="text" color="primary" onClick={handleClose}>
-                                    Cancel
+                                    {prompt.cancel}
                                 </Button>
                                 <div />
                                 <Button variant="contained" color="secondary" onClick={handleContinue}>
-                                    Continue
+                                    {prompt.continue}
                                 </Button>
                             </DialogActions>
                           </Dialog>
