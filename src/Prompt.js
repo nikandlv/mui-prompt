@@ -133,24 +133,24 @@ function Inline(props) {
                 {
                     variant === 'button'
                     ? (
-                        <React.Fragment>
+                        <div>
                             <Button onClick={handleClose}>
                                 {cancelText}
                             </Button>
                             <Button variant="contained" color="secondary" onClick={handleContinue}>
                                 {continueText}
                             </Button>
-                        </React.Fragment>
+                        </div>
                     )
                     : (
-                        <React.Fragment>
+                        <div>
                             <IconButton onClick={handleClose}>
                                 <CancelIcon />
                             </IconButton>
                             <IconButton onClick={handleContinue}>
                                 <ContinueIcon color="secondary"/>
                             </IconButton>
-                        </React.Fragment>
+                        </div>
                     )
                 }
         </Menu>

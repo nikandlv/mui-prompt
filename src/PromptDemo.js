@@ -62,7 +62,7 @@ export default class PromptDemo extends React.Component {
             <div>
                 <Prompt.View />
                 <Container>
-                    <Box m={16}>
+                    <Box m={4}>
                         <Card>
                             <CardContent>
                                 <Typography variant="h4" gutterBottom>
