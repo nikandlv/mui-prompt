@@ -16,6 +16,26 @@ const styles = {
     }
 }
 
+function ask(id,data) {
+    Prompt[id] = {
+        callback : data.callback,
+        title : data.title || 'Are you sure?',
+        body : data.body || 'This action can not be undone!',
+        open: true
+    }
+    Update()
+}
+
+function cancel(key) {
+    Prompt[key].open = false;
+    Update()
+    window.setTimeout(() => {
+        delete Prompt[key];
+    },200)
+}
+
+
+
 class View extends React.Component {
 	componentDidMount() {
 		Update = () => {
@@ -31,12 +51,15 @@ class View extends React.Component {
                     Object.keys(Prompt).map(key => {
                         let prompt = Prompt[key]
                         function handleClose() {
-                            Prompt[key].open = false;
-                            Update()
-                            window.setTimeout(() => {
-                                delete Prompt[key];
-                            },200)
+                            cancel(key)
+                            prompt.callback(false)
                         }
+
+                        function handleContinue() {
+                            cancel(key)
+                            prompt.callback(true)
+                        }
+
                         return (
                             <Dialog maxWidth="xs" key={key} onClose={handleClose} aria-labelledby="simple-dialog-title" open={prompt.open}>
                             <DialogTitle id="simple-dialog-title">{prompt.title}</DialogTitle>
@@ -48,7 +71,7 @@ class View extends React.Component {
                                     Cancel
                                 </Button>
                                 <div />
-                                <Button variant="contained" color="secondary" onClick={prompt.callback}>
+                                <Button variant="contained" color="secondary" onClick={handleContinue}>
                                     Continue
                                 </Button>
                             </DialogActions>
@@ -61,17 +84,8 @@ class View extends React.Component {
 	}
 }
 
-function ask(id,data) {
-    Prompt[id] = {
-        callback : data.callback,
-        title : data.title || 'Are you sure?',
-        body : data.body || 'This action can not be undone!',
-        open: true
-    }
-    Update()
-}
-
 export default {
     ask,
+    cancel,
     View : withStyles(styles)(View)
 }
