@@ -23,6 +23,7 @@ function ask(id,data) {
         body : data.body || 'This action can not be undone!',
         cancel : data.cancel || 'Cancel',
         continue : data.continue || 'Continue',
+        nested: data.nested || false,
         open: true
     }
     Update()
@@ -58,7 +59,9 @@ class View extends React.Component {
                         }
 
                         function handleContinue() {
-                            cancel(key)
+                            if(!prompt.nested) {
+                                cancel(key)
+                            }
                             prompt.callback(true)
                         }
 
