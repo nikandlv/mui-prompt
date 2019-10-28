@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import { DialogContent, DialogActions } from '@material-ui/core';
+import { DialogContent, DialogActions, Typography } from '@material-ui/core';
 
 const Prompt = {};
 // eslint-disable-next-line no-console
@@ -69,7 +69,9 @@ class View extends React.Component {
                             <Dialog maxWidth="xs" key={key} onClose={handleClose} aria-labelledby="simple-dialog-title" open={prompt.open}>
                             <DialogTitle id="simple-dialog-title">{prompt.title}</DialogTitle>
                             <DialogContent className={classes.dialog}>
-                                {prompt.body}
+                                <Typography variant="body1">
+                                    {prompt.body}
+                                </Typography>
                             </DialogContent>
                             <DialogActions>
                                 <Button variant="text" color="primary" onClick={handleClose}>
