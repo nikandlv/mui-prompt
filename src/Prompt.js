@@ -3,7 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import { DialogContent, DialogActions, Typography } from '@material-ui/core';
+import ClearOutlined from '@material-ui/icons/ClearOutlined'
+import DoneOutlined from '@material-ui/icons/DoneOutlined'
+import { DialogContent, DialogActions, Typography, Menu, MenuItem, IconButton } from '@material-ui/core';
 
 const Prompt = {};
 // eslint-disable-next-line no-console
@@ -91,8 +93,75 @@ class View extends React.Component {
 	}
 }
 
+function Inline(props) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const variant = props.variant || 'button'
+
+    const cancelText = props.cancelText || 'Cancel'
+    const continueText = props.continueText || 'Continue'
+
+    const CancelIcon = props.cancelIcon || ClearOutlined;
+    const ContinueIcon = props.continueIcon || DoneOutlined;
+
+    const callback = props.callback || (() => {})
+
+    const handleClick = event => {
+        if(Boolean(anchorEl)) {
+            return
+        }
+        setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+        setAnchorEl(null);
+        callback(false)
+    };
+
+    function handleContinue() {
+        setAnchorEl(null);
+        callback(true)
+    }
+
+    return (
+        <span onClick={handleClick}>
+        <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+        >
+                {
+                    variant === 'button'
+                    ? (
+                        <div>
+                            <Button onClick={handleClose}>
+                                {cancelText}
+                            </Button>
+                            <Button variant="contained" color="secondary" onClick={handleContinue}>
+                                {continueText}
+                            </Button>
+                        </div>
+                    )
+                    : (
+                        <div>
+                            <IconButton onClick={handleClose}>
+                                <CancelIcon />
+                            </IconButton>
+                            <IconButton onClick={handleContinue}>
+                                <ContinueIcon color="secondary"/>
+                            </IconButton>
+                        </div>
+                    )
+                }
+        </Menu>
+            {props.children}
+        </span>
+    )
+}
+
 export default {
     ask,
     cancel,
-    View : withStyles(styles)(View)
+    View : withStyles(styles)(View),
+    Inline
 }
