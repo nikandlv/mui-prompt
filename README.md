@@ -34,7 +34,7 @@ import Prompt from "mui-prompt";
 
 ### render the prompt view
 
-```js
+```jsx
 export default class InlineDemo extends React.Component {
   render() {
     function simplePrompt() {
