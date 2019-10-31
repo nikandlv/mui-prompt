@@ -92,3 +92,16 @@ export default class InlineDemo extends React.Component {
   }
 }
 ```
+
+## Component props
+
+```jsx
+<Prompt.Inline
+  variant={"button" || "icon"}
+  cancelText="Cancel"
+  continueText="Continue"
+  cancelIcon={CancelIcon}
+  continueIcon={DeleteIcon}
+  callback={callback}
+/>
+```
