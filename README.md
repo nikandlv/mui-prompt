@@ -26,7 +26,7 @@ nikandlv@nikandlv.ir:~$ npm i mui-prompt
 
 ## Import it
 
-```js
+```jsx
 import Prompt from "mui-prompt";
 ```
 
@@ -54,3 +54,20 @@ export default class InlineDemo extends React.Component {
   }
 }
 ```
+
+### API
+
+Prompt first parameter is the `key` of dialog and second parameter is the configuration which can be these values
+
+```jsx
+const config = {
+  callback: callback,
+  title: "Are you sure?",
+  body: "This action can not be undone!",
+  cancel: "Cancel",
+  continue: "Continue",
+  nested: false,
+};
+```
+
+#### Note: nested should be applied only on the parents and not the last nested item
