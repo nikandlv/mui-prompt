@@ -70,4 +70,4 @@ const config = {
 };
 ```
 
-#### Note: nested should be applied only on the parents and not the last nested item
+> Note: `nested` should be only applied on the parents and not the last nested item
