@@ -20,6 +20,8 @@ with mui-prompt you can easily ask user for confirmation before executing an imp
 
 ## Install it
 
+> Mui-Prompt uses standard theme provider and will take your theme aswell!
+
 ```console
 nikandlv@nikandlv.ir:~$ npm i mui-prompt
 ```
